@@ -24,19 +24,23 @@ function cleanBoard(){
 
 function draw(x,y){
 	ctx.fillStyle = "rgb(255,255,255)";
-	ctx.fillRect(x*5,y*5,5,5);
+	ctx.fillRect(x*10,y*10,10,10);
 }
 
 function move(entity){
 	var temp = Math.round(Math.random()*4);
 	if(temp == 1){
-		entity.y--;
+		if(entity.y>1)
+			entity.y--;
 	}else if(temp==2){
-		entity.y++;
+		if(entity.y<50)
+			entity.y++;
 	}else if(temp==3){
-		entity.x--;
+		if(entity.x>1)
+			entity.x--;
 	}else{
-		entity.x++;
+		if(entity.x<50)
+			entity.x++;
 	}
 	draw(entity.x,entity.y);
 }
@@ -44,8 +48,8 @@ function move(entity){
 ants = {};
 for(var i = 0; i<100;i++){
 	ants[i] = {};
-	ants[i].x = 50;
-	ants[i].y = 50;
+	ants[i].x = 25;
+	ants[i].y = 25;
 }
 
 function clockCycle(){
