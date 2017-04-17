@@ -30,16 +30,16 @@ function draw(x,y){
 function move(entity){
 	var temp = Math.round(Math.random()*4);
 	if(temp == 1){
-		if(entity.y>1)
+		if(entity.y>0)
 			entity.y--;
 	}else if(temp==2){
-		if(entity.y<50)
+		if(entity.y<49)
 			entity.y++;
 	}else if(temp==3){
-		if(entity.x>1)
+		if(entity.x>0)
 			entity.x--;
 	}else{
-		if(entity.x<50)
+		if(entity.x<49)
 			entity.x++;
 	}
 	draw(entity.x,entity.y);
