@@ -17,26 +17,42 @@ george = {};
 george.x = 50;
 george.y = 50;
 
-function draw(x,y){
+function cleanBoard(){
 	ctx.fillStyle = "rgb(0,0,0)";
 	ctx.fillRect(0,0,500,500);
+}
+
+function draw(x,y){
 	ctx.fillStyle = "rgb(255,255,255)";
 	ctx.fillRect(x*5,y*5,5,5);
 }
 
-function move(){
-	console.log(george.x+","+george.y);
+function move(entity){
 	var temp = Math.round(Math.random()*4);
 	if(temp == 1){
-		george.y--;
+		entity.y--;
 	}else if(temp==2){
-		george.y++;
+		entity.y++;
 	}else if(temp==3){
-		george.x--;
+		entity.x--;
 	}else{
-		george.x++;
+		entity.x++;
 	}
-	draw(george.x,george.y);
+	draw(entity.x,entity.y);
 }
 
-timer = setInterval(move,100);
+ants = {};
+for(var i = 0; i<100;i++){
+	ants.i = {};
+	ants.i.x = 50;
+	ants.i.y = 50;
+}
+
+function clockCycle(){
+	cleanBoard();
+	for(var i = 0; i<100;i++){
+		move(ants.i)
+	}
+}
+
+timer = setInterval(clockCycle,100);
