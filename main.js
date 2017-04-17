@@ -43,15 +43,15 @@ function move(entity){
 
 ants = {};
 for(var i = 0; i<100;i++){
-	ants.i = {};
-	ants.i.x = 50;
-	ants.i.y = 50;
+	ants[i] = {};
+	ants[i].x = 50;
+	ants[i].y = 50;
 }
 
 function clockCycle(){
 	cleanBoard();
 	for(var i = 0; i<100;i++){
-		move(ants.i)
+		move(ants[i]);
 	}
 }
 
