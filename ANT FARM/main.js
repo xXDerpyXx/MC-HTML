@@ -70,9 +70,9 @@ function move(entity){
 			if(grid[entity.x+1][entity.y]["content"] == 0)
 				entity.x++;
 	}
-	if(entity.y<49)
-			if(grid[entity.x][entity.y+1]["content"] == 0)
-				entity.y++;
+	//if(entity.y<49)
+			//if(grid[entity.x][entity.y+1]["content"] == 0)
+				//entity.y++;
 	draw(entity.x,entity.y);
 	dispGrid[entity.x][entity.y]["content"] = 1;
 }

@@ -170,6 +170,10 @@
 		*/
 		drawGrid();
 	}
+	player = {};
+	player = {};
+	player.x = 12;
+	player.y = 12;
 	
 	function drawGrid(){
 		var offset = {};
