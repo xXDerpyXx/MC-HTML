@@ -10,8 +10,13 @@
 
  > FUNCTIONALIZE EVERYTHING
 
+ > USE MORE COMMENTS
+
+ > https://en.wikipedia.org/wiki/Best_coding_practices
+
 ===REMEMBER==
 */
+
 
 //SETUP VARIABLES / GLOBALS
 //======================================================//
