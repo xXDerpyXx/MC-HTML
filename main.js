@@ -26,6 +26,9 @@ ctx = canvas.getContext('2d');
 
 //COMMON FUNCTIONS
 //======================================================//
+
+//Tile Functions
+//=========
 function drawTile(imgName,x,y){ //JUST DRAWS, DOES NOT SET ANYTHING AND CAN BE FORCED TO DRAW NON-EXISTANT TILES
 	img = document.getElementById(imgName);
 	ctx.drawImage(img,x*32,y*32); //USES GRID COORDINATES, NOT TRUE COORDINATES
@@ -36,11 +39,15 @@ function setTile(x,y,grid,blockName){ // proper useage: grid = setTile(x,y,grid,
 	grid.x.y.entityContent = blocks[blockName];
 	return grid;
 }
+//=========
+
 //======================================================//
 
 //UNCOMMON FUNCTIONS
 //======================================================//
 
+//Grid Drawing Functions
+//=========
 function drawGrid(grid,width,height,xOffset,yOffset){ //OFFSETS DONT WORK, PLEASE FIX LATER
 	for(var x=1;x<width;x++){
 		for(var y=1;y<height;y++){
@@ -48,6 +55,7 @@ function drawGrid(grid,width,height,xOffset,yOffset){ //OFFSETS DONT WORK, PLEAS
 		}
 	}
 }
+//=========
 
 //======================================================//
 
