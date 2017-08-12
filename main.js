@@ -34,6 +34,11 @@ function drawTile(imgName,x,y){ //JUST DRAWS, DOES NOT SET ANYTHING AND CAN BE F
 	ctx.drawImage(img,x*32,y*32); //USES GRID COORDINATES, NOT TRUE COORDINATES
 }
 
+function drawHeight(height,x,y){ //JUST DRAWS, DOES NOT SET ANYTHING AND CAN BE FORCED TO DRAW NON-EXISTANT TILES
+	ctx.fillStyle="rgb("+0+","+height+","+0+")";
+	ctx.fillRect(x*32,y*32,32,32); //USES GRID COORDINATES, NOT TRUE COORDINATES
+}
+
 function setTile(x,y,grid,blockName){ // proper useage: grid = setTile(x,y,grid,name)
 	grid.x.y.entityContent = {};
 	grid.x.y.entityContent = blocks[blockName];
@@ -54,6 +59,86 @@ function drawGrid(grid,width,height,xOffset,yOffset){ //OFFSETS DONT WORK, PLEAS
 			drawTile(grid[x][y]["entityContent"]["name"]+".png",x,y);
 		}
 	}
+}
+
+function drawGridHeight(grid,width,height,xOffset,yOffset){
+	for(var x=1;x<width;x++){
+		for(var y=1;y<height;y++){
+			drawHeight(grid[x][y]["entityContent"]["height"],x,y);
+		}
+	}
+}
+//=========
+
+//Grid Setup Functions
+//========
+function setupGrid(width,height){
+	var grid = {};
+	for(var x = 0; x < width; x++){
+		grid[x] = {};
+		for(var y = 0; y < height; y++){
+			grid[x][y]={};
+			grid[x][y]["entityContent"] = {};
+			grid[x][y]["entityContent"]["height"] = 0;
+		}
+	}
+	return grid;
+}
+//========
+
+//Map Generation Functions
+//=========
+function mapGenA(grid,width,height,rand,smoothness){
+	for(var x = 0; x < width; x++){
+		for(var y = 0; y < height; y++){
+			grid[x][y]["entityContent"]["height"] = Math.round(Math.random()*rand);
+			//console.log(grid[x][y]["entityContent"]["height"]);
+		}
+	}
+	
+	for(var i = 0; i<smoothness;i++){
+		grid = smoothGrid(grid,width,height);
+	}
+	
+	return grid;
+}
+
+function smoothGrid(grid,width,height){
+	for(var x = 0; x < width; x++){
+		for(var y = 0; y < height; y++){
+			var total = 1;
+			var avg = grid[x][y]["entityContent"]["height"];
+			try{
+				avg+=grid[x+1][y]["entityContent"]["height"];
+				total+=1;
+			}catch(err){
+				
+			}
+			try{
+				avg+=grid[x-1][y]["entityContent"]["height"];
+				total+=1;
+			}catch(err){
+				
+			}
+			try{
+				avg+=grid[x][y+1]["entityContent"]["height"];
+				total+=1;
+			}catch(err){
+				
+			}
+			
+			try{
+				avg+=grid[x][y-1]["entityContent"]["height"];
+				total+=1;
+			}catch(err){
+				
+			}
+			
+			grid[x][y]["entityContent"]["height"] = Math.round(avg/total);
+			
+		}
+	}
+	return grid;
 }
 //=========
 
@@ -95,3 +180,16 @@ function displayItem(x,y,name,amount,selected){
 }
 */
 //======================================================//
+
+var mainWidth = 30;
+var mainHeight = 30;
+var mainGrid = mapGenA(setupGrid(mainWidth,mainHeight),mainWidth,mainHeight,255,0);
+drawGridHeight(mainGrid,mainWidth,mainHeight,0,0);
+
+function resmooth(){
+	mainGrid = smoothGrid(mainGrid,mainWidth,mainHeight);
+	drawGridHeight(mainGrid,mainWidth,mainHeight,0,0);
+}
+
+var timer = setInterval(resmooth,1000);
+
